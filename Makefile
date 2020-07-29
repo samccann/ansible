@@ -274,6 +274,10 @@ webdocs:
 linkcheckdocs:
 	(cd docs/docsite/; CPUS=$(CPUS) $(MAKE) linkcheckdocs)
 
+.PHONY: spellcheckdocs
+spellcheckdocs:
+	(cd docs/docsite/; CPUS=$(CPUS) $(MAKE) spellcheckdocs)
+
 .PHONY: generate_rst
 generate_rst: lib/ansible/cli/*.py
 	mkdir -p ./docs/man/man1/ ; \

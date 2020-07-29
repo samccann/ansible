@@ -68,6 +68,9 @@ base_singlehtmldocs: base_generate_rst
 linkcheckdocs: generate_rst
 		CPUS=$(CPUS) $(MAKE) -f Makefile.sphinx linkcheck
 
+spellcheckdocs: generate_rst
+				CPUS=$(CPUS) $(MAKE) -f Makefile.sphinx -b spelling
+
 webdocs: docs
 
 #TODO: leaving htmlout removal for those having older versions, should eventually be removed also
