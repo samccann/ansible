@@ -1,0 +1,787 @@
+(cd docs/docsite/; CPUS=8 make docs)
+make[1]: Entering directory '/home/samccann/ansible/docs/docsite'
+# We must have python and python-packaging for the version_helper
+# script so use it for version comparison
+if python -c "import sys, packaging.version as p; sys.exit(not p.Version('2.12') >  p.Version('2.10'))" ; then \
+	echo "Creating symlinks in ansible_structure"; \
+	ln -sf ../rst/ansible_index.rst rst/index.rst; \
+	ln -sf ../sphinx_conf/ansible_conf.py rst/conf.py; \
+else \
+	echo 'Creating symlinks for older ansible in ansible_structure'; \
+	ln -sf ../rst/2.10_index.rst rst/index.rst; \
+	ln -sf ../sphinx_conf/2.10_conf.py rst/conf.py; \
+fi
+Creating symlinks in ansible_structure
+../../hacking/build-ansible.py collection-meta --template-file=../templates/collections_galaxy_meta.rst.j2 --output-dir=rst/dev_guide/  ../../lib/ansible/galaxy/data/collections_galaxy_meta.yml
+../../hacking/build-ansible.py document-config --template-file=../templates/config.rst.j2 --output-dir=rst/reference_appendices/  ../../lib/ansible/config/base.yml
+mkdir -p rst/cli
+../../hacking/build-ansible.py generate-man --template-file=../templates/cli_rst.j2 --output-dir=rst/cli/ --output-format rst  ../../lib/ansible/cli/*.py
+[WARNING]: You are running the development version of Ansible. You should only
+run Ansible from "devel" if you are modifying the Ansible engine, or trying out
+features under development. This is a rapidly changing source of code and can
+become unstable at any point.
+../../hacking/build-ansible.py document-keywords --template-dir=../templates --output-dir=rst/reference_appendices/ ../../lib/ansible/keyword_desc.yml 
+../../hacking/build-ansible.py docs-build full -o rst  --ansible-build-data=../../../ansible-build-data 
+ERROR:antsibull:error=No valid documentation found:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=launchdarkly_labs.collection.launchdarkly_environment:plugin_type=lookup|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=No valid documentation found:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=launchdarkly_labs.collection.launchdarkly_user_segments:plugin_type=lookup|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=No valid documentation found:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=netapp_eseries.santricity.santricity_lun_mapping:plugin_type=lookup|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=No valid documentation found:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=netapp_eseries.santricity.santricity_volume:plugin_type=lookup|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=ansible.windows.async_status:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=ansible.windows.setup:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=ansible.windows.slurp:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Missing documentation or could not parse documentation: while parsing a flow mapping\n  in "<unicode string>", line 10, column 13\ndid not find expected ',' or '}'\n  in "<unicode string>", line 14, column 1:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=cisco.intersight.intersight_local_user_policy:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=launchdarkly_labs.collection.audit:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=No valid documentation found:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=launchdarkly_labs.collection.base:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=launchdarkly_labs.collection.project_copy:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:error=Cannot find plugin:func=get_ansible_plugin_info:mod=antsibull.docs_parsing.ansible_internal:plugin_name=netapp.um_info.na_um_list_volumes:plugin_type=module|Error while extracting documentation. Will not document this plugin.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=["1 validation error for PluginDocSchema\ndoc -> __root__\n  Cannot specify dict_keys(['cache']) if `name` has been  specified. (type=value_error)"]:plugin_name=community.mongodb.mongodb:plugin_type=cache|community.mongodb.mongodb did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=["1 validation error for PluginDocSchema\ndoc -> __root__\n  Cannot specify dict_keys(['lookup']) if `name` has been  specified. (type=value_error)"]:plugin_name=community.mongodb.mongodb:plugin_type=lookup|community.mongodb.mongodb did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize xfconf: return due to: 3 validation errors for PluginReturnSchema\nreturn -> previous_value -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> value -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> value_type -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=community.general.xfconf:plugin_type=module|community.general.xfconf did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for PluginDocSchema\ndoc -> options -> private_key_file -> cli -> 0 -> option\n  extra fields not permitted (type=value_error.extra)']:plugin_name=ansible.builtin.ssh:plugin_type=connection|ansible.builtin.ssh did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> attributes\n  extra fields not permitted (type=value_error.extra)']:plugin_name=ansible.builtin.copy:plugin_type=module|ansible.builtin.copy did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> attributes\n  extra fields not permitted (type=value_error.extra)']:plugin_name=ansible.builtin.import_playbook:plugin_type=module|ansible.builtin.import_playbook did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> attributes\n  extra fields not permitted (type=value_error.extra)']:plugin_name=ansible.builtin.import_role:plugin_type=module|ansible.builtin.import_role did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> attributes\n  extra fields not permitted (type=value_error.extra)']:plugin_name=ansible.builtin.import_tasks:plugin_type=module|ansible.builtin.import_tasks did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['15 validation errors for PluginDocSchema\ndoc -> options -> host -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> host -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> host -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> password -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> password -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> password -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> username -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> username -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> username -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)']:plugin_name=awx.awx.controller:plugin_type=inventory|awx.awx.controller did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['15 validation errors for PluginDocSchema\ndoc -> options -> host -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> host -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> host -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> oauth_token -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> password -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> password -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> password -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> username -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> username -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> username -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> removed_from_collection\n  field required (type=value_error.missing)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> why\n  field required (type=value_error.missing)\ndoc -> options -> verify_ssl -> env -> 1 -> deprecated -> __root__\n  One of `removed_at_date` or `removed_in` must be specified (type=value_error)']:plugin_name=awx.awx.controller_api:plugin_type=lookup|awx.awx.controller_api did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_adpassword_info: return due to: 2 validation errors for PluginReturnSchema\nreturn -> passwords -> contains -> end_date -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> passwords -> contains -> start_date -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=azure.azcollection.azure_rm_adpassword_info:plugin_type=module|azure.azcollection.azure_rm_adpassword_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_containerregistryreplication_info: return due to: 2 validation errors for PluginReturnSchema\nreturn -> replications -> contains -> replication_name -> contains -> status -> contains -> message -> returned\n  none is not an allowed value (type=type_error.none.not_allowed)\nreturn -> replications -> contains -> replication_name -> contains -> status -> contains -> timestamp -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=azure.azcollection.azure_rm_containerregistryreplication_info:plugin_type=module|azure.azcollection.azure_rm_containerregistryreplication_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_containerregistrywebhook_info: return due to: 1 validation error for PluginReturnSchema\nreturn -> webhooks -> contains -> webhook_name -> contains -> scope -> returned\n  none is not an allowed value (type=type_error.none.not_allowed)']:plugin_name=azure.azcollection.azure_rm_containerregistrywebhook_info:plugin_type=module|azure.azcollection.azure_rm_containerregistrywebhook_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_dnsrecordset: return due to: 7 validation errors for PluginReturnSchema\nreturn -> state -> contains -> arecords -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> etag -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> fqdn -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> provisioning_state -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> target_resource -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> ttl -> return\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> type -> return\n  extra fields not permitted (type=value_error.extra)']:plugin_name=azure.azcollection.azure_rm_dnsrecordset:plugin_type=module|azure.azcollection.azure_rm_dnsrecordset did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_galleryimage_info: return due to: 2 validation errors for PluginReturnSchema\nreturn -> images -> contains -> os_state -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> images -> contains -> os_type -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=azure.azcollection.azure_rm_galleryimage_info:plugin_type=module|azure.azcollection.azure_rm_galleryimage_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize azure_rm_publicipaddress: return due to: 11 validation errors for PluginReturnSchema\nreturn -> state -> contains -> dns_settings -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> etag -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> idle_timeout_in_minutes -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> ip_address -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> location -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> name -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> provisioning_state -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> public_ip_address_version -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> public_ip_allocation_method -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> tags -> returns\n  extra fields not permitted (type=value_error.extra)\nreturn -> state -> contains -> type -> returns\n  extra fields not permitted (type=value_error.extra)']:plugin_name=azure.azcollection.azure_rm_publicipaddress:plugin_type=module|azure.azcollection.azure_rm_publicipaddress did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize oci_data_safe_on_prem_connector_actions: return due to: 1 validation error for PluginReturnSchema\nreturn -> on_prem_connector -> contains\n  value is not a valid dict (type=type_error.dict)']:plugin_name=oracle.oci.oci_data_safe_on_prem_connector_actions:plugin_type=module|oracle.oci.oci_data_safe_on_prem_connector_actions did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize barman_server: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.barman_server:plugin_type=lookup|edb_devops.edb_postgres.barman_server did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize hammerdb_server: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.hammerdb_server:plugin_type=lookup|edb_devops.edb_postgres.hammerdb_server did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize pem_agents: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.pem_agents:plugin_type=lookup|edb_devops.edb_postgres.pem_agents did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize pem_server: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.pem_server:plugin_type=lookup|edb_devops.edb_postgres.pem_server did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize pgpool2_nodes: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.pgpool2_nodes:plugin_type=lookup|edb_devops.edb_postgres.pgpool2_nodes did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize supported_roles: return due to: 1 validation error for PluginReturnSchema\nreturn -> _value -> elements\n  str type expected (type=type_error.str)']:plugin_name=edb_devops.edb_postgres.supported_roles:plugin_type=lookup|edb_devops.edb_postgres.supported_roles did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for PluginDocSchema\ndoc -> options -> inventory -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=netapp_eseries.santricity.santricity_host:plugin_type=lookup|netapp_eseries.santricity.santricity_host did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['4 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> boot_devices -> suboptions -> ip_type -> chocies\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_boot_order_policy:plugin_type=module|cisco.intersight.intersight_boot_order_policy did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_imc_access_policy:plugin_type=module|cisco.intersight.intersight_imc_access_policy did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_info:plugin_type=module|cisco.intersight.intersight_info did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_ntp_policy:plugin_type=module|cisco.intersight.intersight_ntp_policy did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_rest_api:plugin_type=module|cisco.intersight.intersight_rest_api did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_server_profile:plugin_type=module|cisco.intersight.intersight_server_profile did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_target_claim:plugin_type=module|cisco.intersight.intersight_target_claim did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> api_key_id -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_private_key -> env\n  extra fields not permitted (type=value_error.extra)\ndoc -> options -> api_uri -> env\n  extra fields not permitted (type=value_error.extra)']:plugin_name=cisco.intersight.intersight_virtual_media_policy:plugin_type=module|cisco.intersight.intersight_virtual_media_policy did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> system_csf -> suboptions -> fabric_device -> suboptions -> access_token -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=fortinet.fortios.fortios_system_csf:plugin_type=module|fortinet.fortios.fortios_system_csf did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> system_sdn_connector -> suboptions -> vcenter_password -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=fortinet.fortios.fortios_system_sdn_connector:plugin_type=module|fortinet.fortios.fortios_system_sdn_connector did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> version_updated\n  extra fields not permitted (type=value_error.extra)']:plugin_name=launchdarkly_labs.collection.launchdarkly_project_info:plugin_type=module|launchdarkly_labs.collection.launchdarkly_project_info did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.aws_direct_connect_connection:plugin_type=module|pureport.pureport.aws_direct_connect_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.azure_express_route_connection:plugin_type=module|pureport.pureport.azure_express_route_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize connections_info: return due to: 1 validation error for PluginReturnSchema\nreturn -> connections -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=pureport.pureport.connections_info:plugin_type=module|pureport.pureport.connections_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize facilities_info: return due to: 10 validation errors for PluginReturnSchema\nreturn -> facilities -> contains -> physical_address -> contains -> city -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> country -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> latitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> latitude -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> longitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> longitude -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> postal_code -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> state -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> street -> required\n  extra fields not permitted (type=value_error.extra)']:plugin_name=pureport.pureport.facilities_info:plugin_type=module|pureport.pureport.facilities_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.google_cloud_interconnect_connection:plugin_type=module|pureport.pureport.google_cloud_interconnect_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize locations_info: return due to: 2 validation errors for PluginReturnSchema\nreturn -> locations -> contains -> geo_coordinates -> contains -> latitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> locations -> contains -> geo_coordinates -> contains -> longitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=pureport.pureport.locations_info:plugin_type=module|pureport.pureport.locations_info did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.port_connection:plugin_type=module|pureport.pureport.port_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_aws_direct_connect_connection:plugin_type=module|pureport.pureport.pureport_aws_direct_connect_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_azure_express_route_connection:plugin_type=module|pureport.pureport.pureport_azure_express_route_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize connections_info: return due to: 1 validation error for PluginReturnSchema\nreturn -> connections -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_connection_facts:plugin_type=module|pureport.pureport.pureport_connection_facts did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize facilities_info: return due to: 10 validation errors for PluginReturnSchema\nreturn -> facilities -> contains -> physical_address -> contains -> city -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> country -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> latitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> latitude -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> longitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> contains -> longitude -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> geo_coordinates -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> postal_code -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> state -> required\n  extra fields not permitted (type=value_error.extra)\nreturn -> facilities -> contains -> physical_address -> contains -> street -> required\n  extra fields not permitted (type=value_error.extra)']:plugin_name=pureport.pureport.pureport_facility_facts:plugin_type=module|pureport.pureport.pureport_facility_facts did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_google_cloud_interconnect_connection:plugin_type=module|pureport.pureport.pureport_google_cloud_interconnect_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['Unable to normalize locations_info: return due to: 2 validation errors for PluginReturnSchema\nreturn -> locations -> contains -> geo_coordinates -> contains -> latitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)\nreturn -> locations -> contains -> geo_coordinates -> contains -> longitude -> type\n  string does not match regex "^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(any|bits|bool|bytes|complex|dict|float|int|json|jsonarg|list|path|sid|str|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_location_facts:plugin_type=module|pureport.pureport.pureport_location_facts did not return correct RETURN or EXAMPLES.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['1 validation error for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_port_connection:plugin_type=module|pureport.pureport.pureport_port_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)\ndoc -> options -> physical_address -> suboptions -> geoCoordinates -> suboptions -> latitude -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)\ndoc -> options -> physical_address -> suboptions -> geoCoordinates -> suboptions -> longitude -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.pureport_site_ipsec_vpn_connection:plugin_type=module|pureport.pureport.pureport_site_ipsec_vpn_connection did not return correct DOCUMENTATION.  An error page will be generated.
+ERROR:antsibull:func=write_plugin_rst:mod=antsibull.write_docs:nonfatal_errors=['3 validation errors for ModuleDocSchema\ndoc -> options -> customer_asn -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)\ndoc -> options -> physical_address -> suboptions -> geoCoordinates -> suboptions -> latitude -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)\ndoc -> options -> physical_address -> suboptions -> geoCoordinates -> suboptions -> longitude -> type\n  string does not match regex "^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$" (type=value_error.str.regex; pattern=^(bits|bool|bytes|dict|float|int|json|jsonarg|list|path|raw|sid|str|tmppath|pathspec|pathlist)$)']:plugin_name=pureport.pureport.site_ipsec_vpn_connection:plugin_type=module|pureport.pureport.site_ipsec_vpn_connection did not return correct DOCUMENTATION.  An error page will be generated.
+../bin/testing_formatter.sh
+CPUS=8 make -f Makefile.sphinx html
+make[2]: Entering directory '/home/samccann/ansible/docs/docsite'
+sphinx-build -M html "rst" "_build" -j 8 -n -w rst_warnings -c "rst"  
+Running Sphinx v4.0.2
+loading pickled environment... done
+loading intersphinx inventory from ../python2.inv...
+loading intersphinx inventory from ../python3.inv...
+loading intersphinx inventory from ../jinja2.inv...
+loading intersphinx inventory from ../ansible_4.inv...
+loading intersphinx inventory from ../ansible_3.inv...
+loading intersphinx inventory from ../ansible_2_10.inv...
+loading intersphinx inventory from ../ansible_2_9.inv...
+loading intersphinx inventory from ../ansible_2_8.inv...
+loading intersphinx inventory from ../ansible_2_7.inv...
+loading intersphinx inventory from ../ansible_2_6.inv...
+loading intersphinx inventory from ../ansible_2_5.inv...
+building [mo]: targets for 0 po files that are out of date
+building [html]: targets for 8535 source files that are out of date
+updating environment: 0 added, 8535 changed, 0 removed
+reading sources... [  1%] cli/ansible .. collections/ansible/builtin/hostname_module
+reading sources... [  2%] collections/ansible/builtin/import_playbook_module .. collections/ansible/netcommon/net_ping_module
+reading sources... [  3%] collections/ansible/netcommon/net_put_module .. collections/arista/eos/eos_command_module
+reading sources... [  4%] collections/arista/eos/eos_config_module .. collections/awx/awx/awx.awx.tower_workflow_job_template_module
+reading sources... [  6%] collections/awx/awx/awx.awx.tower_workflow_job_template_node_module .. collections/azure/azcollection/azure_rm_apimanagement_module
+reading sources... [  7%] collections/azure/azcollection/azure_rm_apimanagementservice_info_module .. collections/azure/azcollection/azure_rm_mariadbconfiguration_module
+reading sources... [  8%] collections/azure/azcollection/azure_rm_mariadbdatabase_info_module .. collections/azure/azcollection/azure_rm_vmbackuppolicy_module
+reading sources... [  9%] collections/azure/azcollection/azure_rm_vpnsite_info_module .. collections/check_point/mgmt/cp_mgmt_show_software_package_details_module
+reading sources... [ 10%] collections/check_point/mgmt/cp_mgmt_show_task_module .. collections/cisco/aci/aci_maintenance_policy_module
+reading sources... [ 12%] collections/cisco/aci/aci_node_mgmt_epg_module .. collections/cisco/ios/lag_interfaces_module
+reading sources... [ 13%] collections/cisco/ios/linkagg_module .. collections/cisco/meraki/meraki_mx_l7_firewall_module
+reading sources... [ 14%] collections/cisco/meraki/meraki_mx_malware_module .. collections/cisco/nxos/command_module
+reading sources... [ 15%] collections/cisco/nxos/config_module .. collections/cisco/nxos/nxos_route_maps_module
+reading sources... [ 16%] collections/cisco/nxos/nxos_rpm_module .. collections/cisco/ucs/ucs_vlans_module
+reading sources... [ 18%] collections/cisco/ucs/ucs_vnic_template_module .. collections/community/aws/ec2_instance_module
+reading sources... [ 19%] collections/community/aws/ec2_launch_template_module .. collections/community/aws/rds_instance_facts_module
+reading sources... [ 20%] collections/community/aws/rds_instance_info_module .. collections/community/azure/azure_rm_manageddisk_info_module
+reading sources... [ 21%] collections/community/azure/azure_rm_manageddisk_module .. collections/community/crypto/openssl_csr_info_module
+reading sources... [ 22%] collections/community/crypto/openssl_csr_module .. collections/community/docker/docker_swarm_service_module
+reading sources... [ 24%] collections/community/docker/docker_volume_info_module .. collections/community/general/credstash_lookup
+reading sources... [ 25%] collections/community/general/cronvar_module .. collections/community/general/github_release_module
+reading sources... [ 26%] collections/community/general/github_repo_module .. collections/community/general/iso_create_module
+reading sources... [ 27%] collections/community/general/iso_extract_module .. collections/community/general/na_cdot_lun_module
+reading sources... [ 28%] collections/community/general/na_cdot_qtree_module .. collections/community/general/ovirt_affinity_label_facts_module
+reading sources... [ 30%] collections/community/general/ovirt_api_facts_module .. collections/community/general/pushbullet_module
+reading sources... [ 31%] collections/community/general/pushover_module .. collections/community/general/sl_vm_module
+reading sources... [ 32%] collections/community/general/slack_callback .. collections/community/google/gc_storage_module
+reading sources... [ 33%] collections/community/google/gce_eip_module .. collections/community/network/aireos_cliconf
+reading sources... [ 34%] collections/community/network/aireos_command_module .. collections/community/network/ce_info_center_log_module
+reading sources... [ 36%] collections/community/network/ce_info_center_trap_module .. collections/community/network/exos_facts_module
+reading sources... [ 37%] collections/community/network/exos_httpapi .. collections/community/network/panos_admpwd_module
+reading sources... [ 38%] collections/community/network/panos_cert_gen_ssh_module .. collections/community/okd/openshift_inventory
+reading sources... [ 39%] collections/community/okd/openshift_process_module .. collections/community/vmware/vmware_drs_group_module
+reading sources... [ 40%] collections/community/vmware/vmware_drs_rule_facts_module .. collections/community/vmware/vmware_host_vmnic_info_module
+reading sources... [ 42%] collections/community/vmware/vmware_httpapi .. collections/community/windows/win_power_plan_module
+reading sources... [ 43%] collections/community/windows/win_product_facts_module .. collections/dellemc/enterprise_sonic/sonic_interfaces_module
+reading sources... [ 44%] collections/dellemc/enterprise_sonic/sonic_l2_interfaces_module .. collections/delowan/googlecloud/gcp_cloudfunctions_cloud_function_info_module
+reading sources... [ 45%] collections/delowan/googlecloud/gcp_cloudfunctions_cloud_function_module .. collections/delowan/googlecloud/gcp_container_cluster_info_module
+reading sources... [ 46%] collections/delowan/googlecloud/gcp_container_cluster_module .. collections/f5networks/f5_modules/bigip_device_ntp_module
+reading sources... [ 48%] collections/f5networks/f5_modules/bigip_device_sshd_module .. collections/f5networks/f5_modules/bigip_smtp_module
+reading sources... [ 49%] collections/f5networks/f5_modules/bigip_snat_pool_module .. collections/fortinet/fortimanager/fmgr_devprof_system_replacemsg_alertmail_module
+reading sources... [ 50%] collections/fortinet/fortimanager/fmgr_devprof_system_replacemsg_auth_module .. collections/fortinet/fortimanager/fmgr_emailfilter_blockallowlist_entries_module
+reading sources... [ 51%] collections/fortinet/fortimanager/fmgr_emailfilter_blockallowlist_module .. collections/fortinet/fortimanager/fmgr_firewall_multicastaddress_module
+reading sources... [ 53%] collections/fortinet/fortimanager/fmgr_firewall_multicastaddress_tagging_module .. collections/fortinet/fortimanager/fmgr_fsp_vlan_dynamicmapping_dhcpserver_options_module
+reading sources... [ 54%] collections/fortinet/fortimanager/fmgr_fsp_vlan_dynamicmapping_dhcpserver_reservedaddress_module .. collections/fortinet/fortimanager/fmgr_pm_config_metafields_firewall_address_module
+reading sources... [ 55%] collections/fortinet/fortimanager/fmgr_pm_config_metafields_firewall_addrgrp_module .. collections/fortinet/fortimanager/fmgr_system_admin_user_adom_module
+reading sources... [ 56%] collections/fortinet/fortimanager/fmgr_system_admin_user_adomexclude_module .. collections/fortinet/fortimanager/fmgr_system_replacemsggroup_icap_module
+reading sources... [ 57%] collections/fortinet/fortimanager/fmgr_system_replacemsggroup_mail_module .. collections/fortinet/fortimanager/fmgr_videofilter_youtubechannelfilter_entries_module
+reading sources... [ 59%] collections/fortinet/fortimanager/fmgr_videofilter_youtubechannelfilter_module .. collections/fortinet/fortimanager/fmgr_webproxy_profile_headers_module
+reading sources... [ 60%] collections/fortinet/fortimanager/fmgr_webproxy_profile_module .. collections/fortinet/fortios/fortios_firewall_internet_service_group_module
+reading sources... [ 61%] collections/fortinet/fortios/fortios_firewall_internet_service_ipbl_reason_module .. collections/fortinet/fortios/fortios_log_fortianalyzer3_override_setting_module
+reading sources... [ 62%] collections/fortinet/fortios/fortios_log_fortianalyzer3_setting_module .. collections/fortinet/fortios/fortios_switch_controller_managed_switch_module
+reading sources... [ 63%] collections/fortinet/fortios/fortios_switch_controller_nac_device_module .. collections/fortinet/fortios/fortios_system_modem_module
+reading sources... [ 65%] collections/fortinet/fortios/fortios_system_nat64_module .. collections/fortinet/fortios/fortios_user_setting_module
+reading sources... [ 66%] collections/fortinet/fortios/fortios_user_tacacsplus_module .. collections/fortinet/fortios/fortios_wireless_controller_vap_status_module
+reading sources... [ 67%] collections/fortinet/fortios/fortios_wireless_controller_wag_profile_module .. collections/google/cloud/gcp_compute_resource_policy_info_module
+reading sources... [ 68%] collections/google/cloud/gcp_compute_resource_policy_module .. collections/hetzner/hcloud/hcloud_load_balancer_info_module
+reading sources... [ 69%] collections/hetzner/hcloud/hcloud_load_balancer_module .. collections/inspur/sm/add_user_module
+reading sources... [ 71%] collections/inspur/sm/alert_policy_info_module .. collections/inspur/sm/psu_info_module
+reading sources... [ 72%] collections/inspur/sm/psu_peak_info_module .. collections/junipernetworks/junos/static_route_module
+reading sources... [ 73%] collections/junipernetworks/junos/static_routes_module .. collections/netapp/cloudmanager/na_cloudmanager_cifs_server_module
+reading sources... [ 74%] collections/netapp/cloudmanager/na_cloudmanager_connector_aws_module .. collections/netapp/ontap/na_ontap_ntfs_dacl_module
+reading sources... [ 75%] collections/netapp/ontap/na_ontap_ntfs_sd_module .. collections/netapp_eseries/santricity/netapp_e_facts_module
+reading sources... [ 77%] collections/netapp_eseries/santricity/netapp_e_firmware_module .. collections/ngine_io/cloudstack/cs_network_module
+reading sources... [ 78%] collections/ngine_io/cloudstack/cs_network_offering_module .. collections/openstack/cloud/federation_mapping_info_module
+reading sources... [ 79%] collections/openstack/cloud/federation_mapping_module .. collections/openstack/cloud/routers_info_module
+reading sources... [ 80%] collections/openstack/cloud/security_group_info_module .. collections/oracle/oci/oci_bastion_session_module
+reading sources... [ 81%] collections/oracle/oci/oci_bds_auto_scale_config_facts_module .. collections/oracle/oci/oci_compute_instance_facts_module
+reading sources... [ 83%] collections/oracle/oci/oci_compute_instance_module .. collections/oracle/oci/oci_database_autonomous_database_regional_wallet_facts_module
+reading sources... [ 84%] collections/oracle/oci/oci_database_autonomous_database_regional_wallet_module .. collections/oracle/oci/oci_database_migration_agent_module
+reading sources... [ 85%] collections/oracle/oci/oci_database_migration_connection_actions_module .. collections/oracle/oci/oci_identity_compartment_actions_module
+reading sources... [ 86%] collections/oracle/oci/oci_identity_compartment_facts_module .. collections/oracle/oci/oci_loadbalancer_routing_policy_module
+reading sources... [ 87%] collections/oracle/oci/oci_loadbalancer_rule_set_facts_module .. collections/oracle/oci/oci_network_cross_connect_status_facts_module
+reading sources... [ 89%] collections/oracle/oci/oci_network_dhcp_options_actions_module .. collections/oracle/oci/oci_network_virtual_circuit_actions_module
+reading sources... [ 90%] collections/oracle/oci/oci_network_virtual_circuit_bandwidth_shape_facts_module .. collections/oracle/oci/oci_os_management_available_windows_update_facts_module
+reading sources... [ 91%] collections/oracle/oci/oci_os_management_errata_facts_module .. collections/oracle/oci/oci_waas_certificate_actions_module
+reading sources... [ 92%] collections/oracle/oci/oci_waas_certificate_facts_module .. collections/pureport/pureport/aws_direct_connect_confirm_connection_module
+reading sources... [ 93%] collections/pureport/pureport/aws_direct_connect_connection_module .. collections/purestorage/flashblade/purefb_inventory_module
+reading sources... [ 95%] collections/purestorage/flashblade/purefb_keytabs_module .. collections/steampunk/aws/ec2_subnet_info_module
+reading sources... [ 96%] collections/steampunk/aws/ec2_subnet_module .. collections/theforeman/foreman/foreman_snapshot_module
+reading sources... [ 97%] collections/theforeman/foreman/foreman_subnet_module .. collections/vmware/vmware_rest/appliance_networking_firewall_inbound_module
+reading sources... [ 98%] collections/vmware/vmware_rest/appliance_networking_info_module .. collections/vmware/vmware_rest/vcenter_vm_tools_installer_info_module
+reading sources... [100%] collections/vmware/vmware_rest/vcenter_vm_tools_installer_module .. collections/wti/remote/index
+
+waiting for workers...
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_monitoring_metric_data_module.rst:49: WARNING: Inline emphasis start-string without end-string.
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_auth_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_client_config_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_coe_cluster_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_coe_cluster_template_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_endpoint_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_flavor_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_flavor_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_floating_ip_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_group_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_group_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_image_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_image_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_ironic_inspect_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_ironic_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_ironic_node_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keypair_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_domain_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_domain_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_endpoint_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_federation_protocol_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_federation_protocol_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_identity_provider_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_identity_provider_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_mapping_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_mapping_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_role_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_keystone_service_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_listener_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_loadbalancer_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_member_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_network_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_networks_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_nova_flavor_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_nova_host_aggregate_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_object_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_pool_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_port_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_port_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_project_access_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_project_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_project_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_quota_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_recordset_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_router_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_routers_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_security_group_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_security_group_rule_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_action_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_group_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_metadata_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_server_volume_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_stack_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_subnet_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_subnets_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_user_group_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_user_info_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_user_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_user_role_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_volume_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_volume_snapshot_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_zone_module.rst:24: WARNING: Unknown target name: "os".
+/home/samccann/ansible/docs/docsite/rst/collections/community/zabbix/zabbix_inventory_inventory.rst:46: WARNING: Unknown target name: "zbx".
+/home/samccann/ansible/docs/docsite/rst/collections/community/general/ssh_config_module.rst:45: WARNING: Inline literal start-string without end-string.
+/home/samccann/ansible/docs/docsite/rst/collections/cloudscale_ch/cloud/cloudscale_floating_ip_module.rst:24: WARNING: Unknown target name: "cloudscale".
+/home/samccann/ansible/docs/docsite/rst/collections/cloudscale_ch/cloud/cloudscale_server_group_module.rst:24: WARNING: Unknown target name: "cloudscale".
+/home/samccann/ansible/docs/docsite/rst/collections/cloudscale_ch/cloud/cloudscale_server_module.rst:24: WARNING: Unknown target name: "cloudscale".
+/home/samccann/ansible/docs/docsite/rst/collections/cloudscale_ch/cloud/cloudscale_volume_module.rst:24: WARNING: Unknown target name: "cloudscale".
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /home/samccann/ansible/docs/docsite/rst/roadmap/COLLECTIONS_5.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... WARNING: search index couldn't be loaded, but not all documents will be built: the index will be incomplete.
+done
+writing output... [  1%] cli/ansible-console .. collections/ansible/builtin/include_vars_module
+/home/samccann/ansible/docs/docsite/rst/collections/amazon/aws/ec2_module.rst:46: WARNING: undefined label: ansible_collections.amazon.aws.ec2_instance_module
+/home/samccann/ansible/docs/docsite/rst/collections/amazon/aws/ec2_module.rst:46: WARNING: undefined label: ansible_collections.amazon.aws.ec2_instance_module
+writing output... [  2%] collections/ansible/builtin/index .. collections/ansible/netcommon/restconf_get_module
+writing output... [  3%] collections/ansible/netcommon/restconf_httpapi .. collections/arista/eos/eos_ospfv3_module
+/home/samccann/ansible/docs/docsite/rst/collections/ansible/posix/synchronize_module.rst:606: WARNING: undefined label: ansible_collections.copy_module
+/home/samccann/ansible/docs/docsite/rst/collections/ansible/windows/win_copy_module.rst:244: WARNING: undefined label: ansible_collections.community.general.assemble_module
+/home/samccann/ansible/docs/docsite/rst/collections/ansible/windows/win_domain_controller_module.rst:311: WARNING: undefined label: ansible_collections.ansible.windows.win_domain_computer_module
+/home/samccann/ansible/docs/docsite/rst/collections/ansible/windows/win_reg_stat_module.rst:121: WARNING: undefined label: ansible_collections.ansible.windows.win_regmerge_module
+/home/samccann/ansible/docs/docsite/rst/collections/ansible/windows/win_regedit_module.rst:226: WARNING: undefined label: ansible_collections.ansible.windows.win_regmerge_module
+writing output... [  5%] collections/arista/eos/eos_prefix_lists_module .. collections/awx/awx/organization_module
+writing output... [  6%] collections/awx/awx/project_module .. collections/azure/azcollection/azure_rm_cosmosdbaccount_info_module
+writing output... [  7%] collections/azure/azcollection/azure_rm_cosmosdbaccount_module .. collections/azure/azcollection/azure_rm_registrationassignment_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_manageddisk_info_module.rst:412: WARNING: undefined label: ansible_collections.azure_rm_managed_disk_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_manageddisk_module.rst:608: WARNING: undefined label: ansible_collections.azure_rm_managed_disk_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_managementgroup_info_module.rst:439: WARNING: undefined label: ansible_collections.azure_rm_subscription_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_managementgroup_info_module.rst:441: WARNING: undefined label: ansible_collections.azure_rm_roleassignment_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_publicipaddress_module.rst:47: WARNING: undefined label: ansible_collections.azure_rm_networkinterface_module
+writing output... [  8%] collections/azure/azcollection/azure_rm_registrationassignment_module .. collections/check_point/mgmt/cp_mgmt_dynamic_object_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_subnet_module.rst:47: WARNING: undefined label: ansible_collections.azure_rm_networkinterface_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_virtualmachine_module.rst:47: WARNING: undefined label: ansible_collections.azure_rm_virtualmachineimage_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_virtualmachineextension_module.rst:46: WARNING: undefined label: ansible_collections.azure_rm_virtualmachine_extension_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_virtualmachinescaleset_info_module.rst:46: WARNING: undefined label: ansible_collections.azure_rm_virtualmachine_scaleset_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_virtualmachinescaleset_module.rst:46: WARNING: undefined label: ansible_collections.azure_rm_virtualmachine_scaleset_module
+/home/samccann/ansible/docs/docsite/rst/collections/azure/azcollection/azure_rm_virtualnetwork_module.rst:45: WARNING: undefined label: ansible_collections.azure_rm_subnet_module
+writing output... [ 10%] collections/check_point/mgmt/cp_mgmt_exception_group_facts_module .. collections/cisco/aci/aci_config_rollback_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_config_module.rst:133: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_config_module.rst:135: WARNING: undefined label: ansible_collections.win_chocolatey_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_config_module.rst:137: WARNING: undefined label: ansible_collections.win_chocolatey_feature_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_config_module.rst:139: WARNING: undefined label: ansible_collections.win_chocolatey_source_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_facts_module.rst:63: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_facts_module.rst:72: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_facts_module.rst:74: WARNING: undefined label: ansible_collections.win_chocolatey_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_facts_module.rst:76: WARNING: undefined label: ansible_collections.win_chocolatey_feature_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_facts_module.rst:78: WARNING: undefined label: ansible_collections.win_chocolatey_source_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_feature_module.rst:117: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_feature_module.rst:119: WARNING: undefined label: ansible_collections.win_chocolatey_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_feature_module.rst:121: WARNING: undefined label: ansible_collections.win_chocolatey_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_feature_module.rst:123: WARNING: undefined label: ansible_collections.win_chocolatey_source_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:598: WARNING: undefined label: ansible_collections.win_hotfix_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:598: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:598: WARNING: undefined label: ansible_collections.win_hotfix_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:607: WARNING: undefined label: ansible_collections.win_chocolatey_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:609: WARNING: undefined label: ansible_collections.win_chocolatey_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:611: WARNING: undefined label: ansible_collections.win_chocolatey_feature_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:613: WARNING: undefined label: ansible_collections.win_chocolatey_source_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:615: WARNING: undefined label: ansible_collections.win_feature_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:617: WARNING: undefined label: ansible_collections.win_hotfix_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:619: WARNING: undefined label: ansible_collections.win_package_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_module.rst:621: WARNING: undefined label: ansible_collections.win_updates_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_source_module.rst:298: WARNING: undefined label: ansible_collections.win_chocolatey_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_source_module.rst:300: WARNING: undefined label: ansible_collections.win_chocolatey_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_source_module.rst:302: WARNING: undefined label: ansible_collections.win_chocolatey_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/chocolatey/chocolatey/win_chocolatey_source_module.rst:304: WARNING: undefined label: ansible_collections.win_chocolatey_feature_module
+writing output... [ 11%] collections/cisco/aci/aci_config_snapshot_module .. collections/cisco/ios/ios_bgp_module
+writing output... [ 12%] collections/cisco/ios/ios_cliconf .. collections/cisco/iosxr/netconf_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_command_module.rst:46: WARNING: undefined label: ansible_collections.ios_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:46: WARNING: undefined label: ansible_collections.net_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:47: WARNING: undefined label: ansible_collections.win_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:48: WARNING: undefined label: ansible_collections.ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:346: WARNING: undefined label: ansible_collections.net_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:347: WARNING: undefined label: ansible_collections.win_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/ios/ios_ping_module.rst:348: WARNING: undefined label: ansible_collections.ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/iosxr/iosxr_command_module.rst:46: WARNING: undefined label: ansible_collections.iosxr_config_module
+writing output... [ 14%] collections/cisco/iosxr/ospf_interfaces_module .. collections/cisco/mso/mso_site_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/meraki/meraki_mx_uplink_bandwidth_module.rst:536: WARNING: undefined label: ansible_collections.meraki_mx_uplink_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_backup_module.rst:393: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_dhcp_option_policy_module.rst:334: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_dhcp_option_policy_option_module.rst:350: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_dhcp_relay_policy_module.rst:334: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_dhcp_relay_policy_provider_module.rst:412: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_label_module.rst:322: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_rest_module.rst:331: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_role_module.rst:405: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_clone_module.rst:317: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_module.rst:304: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_domain_module.rst:603: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_module.rst:364: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_selector_module.rst:455: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_staticleaf_module.rst:410: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_staticport_module.rst:521: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_epg_subnet_module.rst:452: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_anp_module.rst:349: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_bd_l3out_module.rst:365: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_bd_module.rst:383: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_bd_subnet_module.rst:476: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_external_epg_module.rst:365: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_external_epg_selector_module.rst:433: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_l3out_module.rst:417: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_module.rst:334: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_vrf_module.rst:349: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_vrf_region_cidr_module.rst:399: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_vrf_region_cidr_subnet_module.rst:433: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_vrf_region_hub_network_module.rst:414: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_site_vrf_region_module.rst:384: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_anp_epg_contract_module.rst:433: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_anp_epg_module.rst:702: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_anp_epg_selector_module.rst:437: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_anp_epg_subnet_module.rst:437: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_anp_module.rst:349: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_bd_dhcp_policy_module.rst:413: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_bd_module.rst:993: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_bd_subnet_module.rst:460: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_clone_module.rst:377: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_contract_filter_module.rst:480: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_deploy_module.rst:335: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_deploy_status_module.rst:331: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_external_epg_contract_module.rst:419: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_external_epg_module.rst:587: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_external_epg_selector_module.rst:418: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_external_epg_subnet_module.rst:380: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_filter_entry_module.rst:595: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_l3out_module.rst:415: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_migrate_module.rst:406: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_module.rst:350: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_vrf_contract_module.rst:419: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_schema_template_vrf_module.rst:387: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_site_module.rst:456: WARNING: undefined label: mso_guide
+writing output... [ 15%] collections/cisco/mso/mso_tenant_module .. collections/cisco/nxos/nxos_logging_module
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_tenant_module.rst:367: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_tenant_site_module.rst:525: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_user_module.rst:435: WARNING: undefined label: mso_guide
+/home/samccann/ansible/docs/docsite/rst/collections/cisco/mso/mso_version_module.rst:285: WARNING: undefined label: mso_guide
+writing output... [ 16%] collections/cisco/nxos/nxos_netconf .. collections/cisco/ucs/ucs_server_maintenance_module
+writing output... [ 17%] collections/cisco/ucs/ucs_service_profile_association_module .. collections/community/aws/ec2_elb_facts_module
+writing output... [ 19%] collections/community/aws/ec2_elb_info_module .. collections/community/aws/rds_instance_module
+writing output... [ 20%] collections/community/aws/rds_module .. collections/community/azure/azure_rm_mariadbserver_info_module
+writing output... [ 21%] collections/community/azure/azure_rm_mysqlconfiguration_facts_module .. collections/community/crypto/x509_crl_module
+writing output... [ 23%] collections/community/digitalocean/digital_ocean_account_facts_module .. collections/community/fortios/fmgr_secprof_dns_module
+writing output... [ 24%] collections/community/fortios/fmgr_secprof_ips_module .. collections/community/general/docker_login_module
+writing output... [ 25%] collections/community/general/docker_machine_inventory .. collections/community/general/htpasswd_module
+writing output... [ 26%] collections/community/general/hwc_ecs_instance_module .. collections/community/general/linode_v4_module
+writing output... [ 28%] collections/community/general/listen_ports_facts_module .. collections/community/general/one_image_info_module
+writing output... [ 29%] collections/community/general/one_image_module .. collections/community/general/postgresql_db_module
+writing output... [ 30%] collections/community/general/postgresql_ext_module .. collections/community/general/scaleway_ip_info_module
+writing output... [ 32%] collections/community/general/scaleway_ip_module .. collections/community/general/virtualbox_inventory
+/home/samccann/ansible/docs/docsite/rst/collections/community/aws/ec2_eip_info_module.rst:288: WARNING: Could not lex literal_block as "yaml+jinja". Highlighting skipped.
+writing output... [ 33%] collections/community/general/vmadm_module .. collections/community/mongodb/mongodb_index_module
+writing output... [ 34%] collections/community/mongodb/mongodb_info_module .. collections/community/network/ce_bgp_module
+writing output... [ 35%] collections/community/network/ce_bgp_neighbor_af_module .. collections/community/network/edgeswitch_vlan_module
+writing output... [ 37%] collections/community/network/enos_cliconf .. collections/community/network/ordnance_config_module
+writing output... [ 38%] collections/community/network/ordnance_facts_module .. collections/community/postgresql/postgresql_copy_module
+writing output... [ 39%] collections/community/postgresql/postgresql_db_module .. collections/community/vmware/vmware_dvswitch_nioc_module
+writing output... [ 41%] collections/community/vmware/vmware_dvswitch_pvlans_module .. collections/community/vmware/vmware_resource_pool_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/community/vmware/vmware_host_kernel_manager_module.rst:48: WARNING: undefined label: ansible_collections.community.vmware.reboot_module
+writing output... [ 42%] collections/community/vmware/vmware_resource_pool_info_module .. collections/community/windows/win_shortcut_module
+/home/samccann/ansible/docs/docsite/rst/collections/community/windows/win_nssm_module.rst:442: WARNING: undefined label: ansible_collections.ansible.windowswin_service_module
+writing output... [ 43%] collections/community/windows/win_snmp_module .. collections/dellemc/openmanage/idrac_server_config_profile_module
+/home/samccann/ansible/docs/docsite/rst/collections/community/windows/win_zip_module.rst:45: WARNING: undefined label: ansible_collections.ansible.builtin.archive_module
+/home/samccann/ansible/docs/docsite/rst/collections/community/windows/win_zip_module.rst:123: WARNING: undefined label: ansible_collections.ansible.builtin.archive_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/enterprise_sonic/sonic_command_module.rst:46: WARNING: undefined label: ansible_collections.sonic_config_module
+writing output... [ 44%] collections/dellemc/openmanage/idrac_syslog_module .. collections/delowan/googlecloud/gcp_compute_instance_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/os6/os6_command_module.rst:45: WARNING: undefined label: ansible_collections.dellemc_os6_os6_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/os9/os9_command_module.rst:45: WARNING: undefined label: ansible_collections.dellemc_os9_os9_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/os9/os9_command_module.rst:308: WARNING: undefined label: ansible_collections.os9_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/os9/os9_config_module.rst:462: WARNING: undefined label: ansible_collections.os9_config_module
+/home/samccann/ansible/docs/docsite/rst/collections/dellemc/os9/os9_facts_module.rst:242: WARNING: undefined label: ansible_collections.os9_config_module
+writing output... [ 46%] collections/delowan/googlecloud/gcp_compute_instance_template_info_module .. collections/delowan/googlecloud/gcp_sql_database_module
+writing output... [ 47%] collections/delowan/googlecloud/gcp_sql_instance_info_module .. collections/f5networks/f5_modules/bigip_message_routing_router_module
+writing output... [ 48%] collections/f5networks/f5_modules/bigip_message_routing_transport_config_module .. collections/fortinet/fortimanager/fmgr_antivirus_profile_nntp_module
+writing output... [ 50%] collections/fortinet/fortimanager/fmgr_antivirus_profile_outbreakprevention_module .. collections/fortinet/fortimanager/fmgr_dvmdb_workflow_save_module
+writing output... [ 51%] collections/fortinet/fortimanager/fmgr_dvmdb_workflow_start_module .. collections/fortinet/fortimanager/fmgr_firewall_gtp_policyv2_module
+writing output... [ 52%] collections/fortinet/fortimanager/fmgr_firewall_identitybasedroute_module .. collections/fortinet/fortimanager/fmgr_fmupdate_fdssetting_serveroverride_module
+writing output... [ 53%] collections/fortinet/fortimanager/fmgr_fmupdate_fdssetting_serveroverride_servlist_module .. collections/fortinet/fortimanager/fmgr_pkg_firewall_policy_module
+writing output... [ 55%] collections/fortinet/fortimanager/fmgr_pkg_firewall_policy_sectionvalue_module .. collections/fortinet/fortimanager/fmgr_system_admin_group_module
+writing output... [ 56%] collections/fortinet/fortimanager/fmgr_system_admin_ldap_adom_module .. collections/fortinet/fortimanager/fmgr_system_replacemsggroup_http_module
+writing output... [ 57%] collections/fortinet/fortimanager/fmgr_system_replacemsggroup_icap_module .. collections/fortinet/fortimanager/fmgr_vpn_certificate_ocspserver_module
+writing output... [ 58%] collections/fortinet/fortimanager/fmgr_vpn_certificate_remote_module .. collections/fortinet/fortimanager/fmgr_wtpprofile_splittunnelingacl_module
+writing output... [ 60%] collections/fortinet/fortimanager/fortimanager_httpapi .. collections/fortinet/fortios/fortios_firewall_multicast_address6_module
+writing output... [ 61%] collections/fortinet/fortios/fortios_firewall_multicast_address_module .. collections/fortinet/fortios/fortios_log_syslogd3_override_setting_module
+writing output... [ 62%] collections/fortinet/fortios/fortios_log_syslogd3_setting_module .. collections/fortinet/fortios/fortios_switch_controller_vlan_module
+writing output... [ 64%] collections/fortinet/fortios/fortios_switch_controller_vlan_policy_module .. collections/fortinet/fortios/fortios_system_replacemsg_webproxy_module
+writing output... [ 65%] collections/fortinet/fortios/fortios_system_resource_limits_module .. collections/fortinet/fortios/fortios_web_proxy_profile_module
+writing output... [ 66%] collections/fortinet/fortios/fortios_web_proxy_url_match_module .. collections/google/cloud/gcp_compute_global_address_module
+writing output... [ 67%] collections/google/cloud/gcp_compute_global_forwarding_rule_info_module .. collections/google/cloud/gcp_redis_instance_module
+writing output... [ 69%] collections/google/cloud/gcp_resourcemanager_project_info_module .. collections/index_become
+writing output... [ 70%] collections/index_cache .. collections/inspur/sm/fan_info_module
+writing output... [ 71%] collections/inspur/sm/fru_info_module .. collections/junipernetworks/junos/l3_interfaces_module
+/home/samccann/ansible/docs/docsite/rst/collections/junipernetworks/junos/junos_ping_module.rst:381: WARNING: undefined label: ansible_collections.ansible.netcommon..net_ping_module
+writing output... [ 73%] collections/junipernetworks/junos/lacp_interfaces_module .. collections/mellanox/onyx/onyx_wjh_module
+/home/samccann/ansible/docs/docsite/rst/collections/kubernetes/core/k8s_json_patch_module.rst:46: WARNING: undefined label: ansible_collections.k8s_module
+/home/samccann/ansible/docs/docsite/rst/collections/mellanox/onyx/onyx_command_module.rst:45: WARNING: undefined label: ansible_collections.onyx_config_module
+writing output... [ 74%] collections/netapp/aws/aws_netapp_cvs_active_directory_module .. collections/netapp/ontap/na_ontap_net_port_module
+writing output... [ 75%] collections/netapp/ontap/na_ontap_net_routes_module .. collections/netapp_eseries/santricity/netapp_e_firmware_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_alerts_module.rst:266: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_alerts_syslog_module.rst:229: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_asup_module.rst:529: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_auditlog_module.rst:253: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_auth_module.rst:233: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_client_certificate_module.rst:220: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_drive_firmware_module.rst:232: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_facts_module.rst:158: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_firmware_module.rst:231: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_global_module.rst:282: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_host_module.rst:321: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_hostgroup_module.rst:207: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_ib_iser_interface_module.rst:212: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_iscsi_interface_module.rst:309: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_iscsi_target_module.rst:233: WARNING: undefined label: ansible_collections.na_santricity_iscsi_interface_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_iscsi_target_module.rst:237: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_ldap_module.rst:339: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_lun_mapping_module.rst:228: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_mgmt_interface_module.rst:409: WARNING: undefined label: ansible_collections.na_santricity_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_mgmt_interface_module.rst:413: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_nvme_interface_module.rst:324: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_proxy_drive_firmware_upload_module.rst:159: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_proxy_firmware_upload_module.rst:158: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_proxy_systems_module.rst:336: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_server_certificate_module.rst:221: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_snapshot_module.rst:598: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_storagepool_module.rst:537: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_syslog_module.rst:270: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/na_santricity_volume_module.rst:588: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_alerts_module.rst:281: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_amg_module.rst:326: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_asup_module.rst:299: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_auditlog_module.rst:268: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_drive_firmware_module.rst:232: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_facts_module.rst:158: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_firmware_module.rst:227: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+writing output... [ 76%] collections/netapp_eseries/santricity/netapp_e_flashcache_module .. collections/ngine_io/cloudstack/cs_role_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_global_module.rst:193: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_host_module.rst:346: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_hostgroup_module.rst:239: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_iscsi_interface_module.rst:326: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_iscsi_target_module.rst:248: WARNING: undefined label: ansible_collections.netapp_e_iscsi_interface_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_iscsi_target_module.rst:252: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_ldap_module.rst:352: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_lun_mapping_module.rst:253: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_mgmt_interface_module.rst:451: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_storagepool_module.rst:468: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_syslog_module.rst:285: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_volume_copy_module.rst:340: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+/home/samccann/ansible/docs/docsite/rst/collections/netapp_eseries/santricity/netapp_e_volume_module.rst:615: WARNING: undefined label: ansible_collections.netapp_e_storage_system_module
+writing output... [ 78%] collections/ngine_io/cloudstack/cs_role_permission_module .. collections/openstack/cloud/image_module
+/home/samccann/ansible/docs/docsite/rst/collections/ngine_io/cloudstack/cs_router_module.rst:46: WARNING: undefined label: ansible_collections.cs_network_module
+writing output... [ 79%] collections/openstack/cloud/index .. collections/openvswitch/index
+/home/samccann/ansible/docs/docsite/rst/collections/openstack/cloud/os_endpoint_module.rst:22: WARNING: undefined label: ansible_collections.openstack.cloud.catalog_endpoint_module
+writing output... [ 80%] collections/openvswitch/openvswitch/bond_module .. collections/oracle/oci/oci_blockstorage_volume_backup_policy_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_analytics_instance_module.rst:47: WARNING: undefined label: ansible_collections.oci_analytics_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_apigateway_api_module.rst:47: WARNING: undefined label: ansible_collections.oci_api_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_apigateway_certificate_module.rst:47: WARNING: undefined label: ansible_collections.oci_certificate_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_apigateway_deployment_module.rst:47: WARNING: undefined label: ansible_collections.oci_deployment_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_apigateway_gateway_module.rst:47: WARNING: undefined label: ansible_collections.oci_gateway_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_apm_control_plane_apm_domain_module.rst:47: WARNING: undefined label: ansible_collections.oci_apm_domain_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_artifacts_container_image_module.rst:46: WARNING: undefined label: ansible_collections.oci_container_image_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_artifacts_container_repository_module.rst:47: WARNING: undefined label: ansible_collections.oci_container_repository_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_artifacts_repository_module.rst:47: WARNING: undefined label: ansible_collections.oci_repository_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_autoscaling_auto_scaling_configuration_module.rst:47: WARNING: undefined label: ansible_collections.oci_auto_scaling_configuration_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_bastion_module.rst:47: WARNING: undefined label: ansible_collections.oci_bastion_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_bds_instance_module.rst:47: WARNING: undefined label: ansible_collections.oci_bds_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockchain_platform_module.rst:47: WARNING: undefined label: ansible_collections.oci_blockchain_platform_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_boot_volume_backup_module.rst:48: WARNING: undefined label: ansible_collections.oci_boot_volume_backup_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_boot_volume_module.rst:47: WARNING: undefined label: ansible_collections.oci_boot_volume_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_volume_backup_module.rst:48: WARNING: undefined label: ansible_collections.oci_volume_backup_actions_module
+writing output... [ 82%] collections/oracle/oci/oci_blockstorage_volume_backup_policy_module .. collections/oracle/oci/oci_data_catalog_connection_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_volume_group_backup_module.rst:47: WARNING: undefined label: ansible_collections.oci_volume_group_backup_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_volume_group_module.rst:48: WARNING: undefined label: ansible_collections.oci_volume_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_blockstorage_volume_module.rst:49: WARNING: undefined label: ansible_collections.oci_volume_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_cloud_guard_detector_recipe_module.rst:47: WARNING: undefined label: ansible_collections.oci_detector_recipe_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_cloud_guard_managed_list_module.rst:47: WARNING: undefined label: ansible_collections.oci_managed_list_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_cloud_guard_responder_recipe_module.rst:47: WARNING: undefined label: ansible_collections.oci_responder_recipe_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_capacity_reservation_module.rst:47: WARNING: undefined label: ansible_collections.oci_compute_capacity_reservation_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_dedicated_vm_host_module.rst:47: WARNING: undefined label: ansible_collections.oci_dedicated_vm_host_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_image_capability_schema_module.rst:47: WARNING: undefined label: ansible_collections.oci_compute_image_capability_schema_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_image_module.rst:53: WARNING: undefined label: ansible_collections.oci_image_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_instance_module.rst:54: WARNING: undefined label: ansible_collections.oci_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_management_cluster_network_module.rst:47: WARNING: undefined label: ansible_collections.oci_cluster_network_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_management_instance_configuration_module.rst:47: WARNING: undefined label: ansible_collections.oci_instance_configuration_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_management_instance_pool_instance_module.rst:47: WARNING: undefined label: ansible_collections.oci_instance_pool_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_compute_management_instance_pool_module.rst:47: WARNING: undefined label: ansible_collections.oci_instance_pool_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_container_engine_cluster_module.rst:47: WARNING: undefined label: ansible_collections.oci_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_catalog_catalog_module.rst:47: WARNING: undefined label: ansible_collections.oci_catalog_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_catalog_catalog_private_endpoint_module.rst:47: WARNING: undefined label: ansible_collections.oci_catalog_private_endpoint_actions_module
+writing output... [ 83%] collections/oracle/oci/oci_data_catalog_connection_facts_module .. collections/oracle/oci/oci_database_db_system_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_catalog_connection_module.rst:47: WARNING: undefined label: ansible_collections.oci_connection_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_catalog_data_asset_module.rst:47: WARNING: undefined label: ansible_collections.oci_data_asset_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_flow_application_module.rst:47: WARNING: undefined label: ansible_collections.oci_application_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_flow_private_endpoint_module.rst:47: WARNING: undefined label: ansible_collections.oci_private_endpoint_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_flow_run_module.rst:47: WARNING: undefined label: ansible_collections.oci_run_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_integration_workspace_module.rst:47: WARNING: undefined label: ansible_collections.oci_workspace_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_safe_on_prem_connector_module.rst:47: WARNING: undefined label: ansible_collections.oci_on_prem_connector_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_safe_private_endpoint_module.rst:47: WARNING: undefined label: ansible_collections.oci_data_safe_private_endpoint_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_safe_target_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_target_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_science_model_deployment_module.rst:47: WARNING: undefined label: ansible_collections.oci_model_deployment_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_science_model_module.rst:47: WARNING: undefined label: ansible_collections.oci_model_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_science_notebook_session_module.rst:47: WARNING: undefined label: ansible_collections.oci_notebook_session_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_data_science_project_module.rst:47: WARNING: undefined label: ansible_collections.oci_project_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_autonomous_container_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_autonomous_container_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_autonomous_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_autonomous_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_autonomous_exadata_infrastructure_module.rst:47: WARNING: undefined label: ansible_collections.oci_autonomous_exadata_infrastructure_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_autonomous_vm_cluster_module.rst:47: WARNING: undefined label: ansible_collections.oci_autonomous_vm_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_backup_destination_module.rst:47: WARNING: undefined label: ansible_collections.oci_backup_destination_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_cloud_exadata_infrastructure_module.rst:47: WARNING: undefined label: ansible_collections.oci_cloud_exadata_infrastructure_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_cloud_vm_cluster_module.rst:47: WARNING: undefined label: ansible_collections.oci_cloud_vm_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_data_guard_association_module.rst:48: WARNING: undefined label: ansible_collections.oci_data_guard_association_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_database_actions_module
+writing output... [ 84%] collections/oracle/oci/oci_database_db_system_facts_module .. collections/oracle/oci/oci_events_rule_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_db_system_module.rst:51: WARNING: undefined label: ansible_collections.oci_db_system_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_exadata_infrastructure_module.rst:47: WARNING: undefined label: ansible_collections.oci_exadata_infrastructure_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_external_container_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_external_container_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_external_database_connector_module.rst:47: WARNING: undefined label: ansible_collections.oci_external_database_connector_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_external_non_container_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_external_non_container_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_external_pluggable_database_module.rst:47: WARNING: undefined label: ansible_collections.oci_external_pluggable_database_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_key_store_module.rst:47: WARNING: undefined label: ansible_collections.oci_key_store_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_management_job_module.rst:47: WARNING: undefined label: ansible_collections.oci_job_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_management_managed_database_group_module.rst:47: WARNING: undefined label: ansible_collections.oci_managed_database_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_migration_agent_module.rst:46: WARNING: undefined label: ansible_collections.oci_agent_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_migration_connection_module.rst:47: WARNING: undefined label: ansible_collections.oci_connection_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_migration_migration_module.rst:47: WARNING: undefined label: ansible_collections.oci_migration_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_software_image_module.rst:47: WARNING: undefined label: ansible_collections.oci_database_software_image_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_vm_cluster_module.rst:47: WARNING: undefined label: ansible_collections.oci_vm_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_database_vm_cluster_network_module.rst:47: WARNING: undefined label: ansible_collections.oci_vm_cluster_network_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_dns_resolver_module.rst:46: WARNING: undefined label: ansible_collections.oci_resolver_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_dns_steering_policy_module.rst:47: WARNING: undefined label: ansible_collections.oci_steering_policy_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_dns_tsig_key_module.rst:47: WARNING: undefined label: ansible_collections.oci_tsig_key_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_dns_view_module.rst:47: WARNING: undefined label: ansible_collections.oci_view_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_dns_zone_module.rst:47: WARNING: undefined label: ansible_collections.oci_zone_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_email_sender_module.rst:47: WARNING: undefined label: ansible_collections.oci_sender_actions_module
+writing output... [ 85%] collections/oracle/oci/oci_events_rule_facts_module .. collections/oracle/oci/oci_key_management_key_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_events_rule_module.rst:47: WARNING: undefined label: ansible_collections.oci_rule_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_file_storage_file_system_module.rst:52: WARNING: undefined label: ansible_collections.oci_file_system_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_file_storage_mount_target_module.rst:51: WARNING: undefined label: ansible_collections.oci_mount_target_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_functions_application_module.rst:47: WARNING: undefined label: ansible_collections.oci_application_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_functions_function_module.rst:47: WARNING: undefined label: ansible_collections.oci_function_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_golden_gate_database_registration_module.rst:47: WARNING: undefined label: ansible_collections.oci_database_registration_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_golden_gate_deployment_backup_module.rst:47: WARNING: undefined label: ansible_collections.oci_deployment_backup_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_golden_gate_deployment_module.rst:47: WARNING: undefined label: ansible_collections.oci_deployment_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_healthchecks_http_monitor_module.rst:47: WARNING: undefined label: ansible_collections.oci_http_monitor_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_healthchecks_ping_monitor_module.rst:47: WARNING: undefined label: ansible_collections.oci_ping_monitor_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_identity_compartment_module.rst:52: WARNING: undefined label: ansible_collections.oci_compartment_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_identity_mfa_totp_device_module.rst:47: WARNING: undefined label: ansible_collections.oci_mfa_totp_device_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_identity_provider_module.rst:51: WARNING: undefined label: ansible_collections.oci_identity_provider_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_identity_tag_module.rst:52: WARNING: undefined label: ansible_collections.oci_tag_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_identity_tag_namespace_module.rst:50: WARNING: undefined label: ansible_collections.oci_tag_namespace_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_integration_instance_module.rst:47: WARNING: undefined label: ansible_collections.oci_integration_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_jms_fleet_module.rst:47: WARNING: undefined label: ansible_collections.oci_fleet_actions_module
+writing output... [ 87%] collections/oracle/oci/oci_key_management_key_module .. collections/oracle/oci/oci_mysql_analytics_cluster_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_key_management_key_module.rst:48: WARNING: undefined label: ansible_collections.oci_key_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_key_management_key_version_module.rst:48: WARNING: undefined label: ansible_collections.oci_key_version_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_key_management_vault_module.rst:48: WARNING: undefined label: ansible_collections.oci_vault_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_loadbalancer_load_balancer_module.rst:53: WARNING: undefined label: ansible_collections.oci_load_balancer_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_log_analytics_entity_module.rst:47: WARNING: undefined label: ansible_collections.oci_log_analytics_entity_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_log_analytics_log_group_module.rst:47: WARNING: undefined label: ansible_collections.oci_log_analytics_log_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_logging_log_group_module.rst:47: WARNING: undefined label: ansible_collections.oci_log_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_logging_log_module.rst:47: WARNING: undefined label: ansible_collections.oci_log_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_logging_log_saved_search_module.rst:47: WARNING: undefined label: ansible_collections.oci_log_saved_search_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_logging_unified_agent_configuration_module.rst:47: WARNING: undefined label: ansible_collections.oci_unified_agent_configuration_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_management_agent_module.rst:46: WARNING: undefined label: ansible_collections.oci_management_agent_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_marketplace_publication_module.rst:47: WARNING: undefined label: ansible_collections.oci_publication_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_monitoring_alarm_module.rst:48: WARNING: undefined label: ansible_collections.oci_alarm_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_monitoring_metric_data_module.rst:52: WARNING: undefined label: ansible_collections.oci_metric_data_actions_module
+writing output... [ 88%] collections/oracle/oci/oci_mysql_analytics_cluster_memory_estimate_actions_module .. collections/oracle/oci/oci_network_public_ip_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_mysql_analytics_cluster_module.rst:46: WARNING: undefined label: ansible_collections.oci_analytics_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_mysql_channel_module.rst:47: WARNING: undefined label: ansible_collections.oci_channel_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_mysql_db_system_module.rst:47: WARNING: undefined label: ansible_collections.oci_db_system_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_mysql_heat_wave_cluster_module.rst:46: WARNING: undefined label: ansible_collections.oci_heat_wave_cluster_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_byoip_range_module.rst:47: WARNING: undefined label: ansible_collections.oci_byoip_range_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_cpe_module.rst:50: WARNING: undefined label: ansible_collections.oci_cpe_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_cross_connect_group_module.rst:49: WARNING: undefined label: ansible_collections.oci_cross_connect_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_cross_connect_module.rst:50: WARNING: undefined label: ansible_collections.oci_cross_connect_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_dhcp_options_module.rst:49: WARNING: undefined label: ansible_collections.oci_dhcp_options_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_drg_attachment_module.rst:49: WARNING: undefined label: ansible_collections.oci_drg_attachment_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_drg_module.rst:49: WARNING: undefined label: ansible_collections.oci_drg_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_drg_route_table_module.rst:47: WARNING: undefined label: ansible_collections.oci_drg_route_table_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_internet_gateway_module.rst:51: WARNING: undefined label: ansible_collections.oci_internet_gateway_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_ip_sec_connection_module.rst:53: WARNING: undefined label: ansible_collections.oci_ip_sec_connection_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_load_balancer_module.rst:47: WARNING: undefined label: ansible_collections.oci_network_load_balancer_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_local_peering_gateway_module.rst:47: WARNING: undefined label: ansible_collections.oci_local_peering_gateway_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_nat_gateway_module.rst:47: WARNING: undefined label: ansible_collections.oci_nat_gateway_actions_module
+writing output... [ 89%] collections/oracle/oci/oci_network_public_ip_module .. collections/oracle/oci/oci_opsi_resource_utilization_insight_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_public_ip_module.rst:51: WARNING: undefined label: ansible_collections.oci_public_ip_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_public_ip_pool_module.rst:47: WARNING: undefined label: ansible_collections.oci_public_ip_pool_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_remote_peering_connection_module.rst:47: WARNING: undefined label: ansible_collections.oci_remote_peering_connection_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_route_table_module.rst:49: WARNING: undefined label: ansible_collections.oci_route_table_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_security_group_module.rst:47: WARNING: undefined label: ansible_collections.oci_network_security_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_security_list_module.rst:49: WARNING: undefined label: ansible_collections.oci_security_list_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_service_gateway_module.rst:49: WARNING: undefined label: ansible_collections.oci_service_gateway_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_subnet_module.rst:53: WARNING: undefined label: ansible_collections.oci_subnet_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_vcn_module.rst:55: WARNING: undefined label: ansible_collections.oci_vcn_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_virtual_circuit_module.rst:50: WARNING: undefined label: ansible_collections.oci_virtual_circuit_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_network_vlan_module.rst:47: WARNING: undefined label: ansible_collections.oci_vlan_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_nosql_table_module.rst:47: WARNING: undefined label: ansible_collections.oci_table_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_object_storage_bucket_module.rst:47: WARNING: undefined label: ansible_collections.oci_bucket_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_object_storage_object_module.rst:46: WARNING: undefined label: ansible_collections.oci_object_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_oce_instance_module.rst:47: WARNING: undefined label: ansible_collections.oci_oce_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_ocvp_sddc_module.rst:49: WARNING: undefined label: ansible_collections.oci_sddc_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_oda_instance_module.rst:48: WARNING: undefined label: ansible_collections.oci_oda_instance_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_ons_notification_topic_module.rst:51: WARNING: undefined label: ansible_collections.oci_notification_topic_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_ons_subscription_module.rst:48: WARNING: undefined label: ansible_collections.oci_subscription_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_opsi_database_insights_module.rst:47: WARNING: undefined label: ansible_collections.oci_database_insights_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_opsi_enterprise_manager_bridge_module.rst:47: WARNING: undefined label: ansible_collections.oci_enterprise_manager_bridge_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_opsi_host_insight_module.rst:47: WARNING: undefined label: ansible_collections.oci_host_insight_actions_module
+writing output... [ 91%] collections/oracle/oci/oci_opsi_sql_insights_facts_module .. collections/oracle/oci/oci_vulnerability_scanning_container_scan_target_facts_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_optimizer_recommendation_module.rst:46: WARNING: undefined label: ansible_collections.oci_recommendation_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_os_management_managed_instance_group_module.rst:47: WARNING: undefined label: ansible_collections.oci_managed_instance_group_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_os_management_scheduled_job_module.rst:47: WARNING: undefined label: ansible_collections.oci_scheduled_job_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_os_management_software_source_module.rst:47: WARNING: undefined label: ansible_collections.oci_software_source_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_resource_manager_configuration_source_provider_module.rst:47: WARNING: undefined label: ansible_collections.oci_configuration_source_provider_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_resource_manager_stack_module.rst:47: WARNING: undefined label: ansible_collections.oci_stack_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_resource_manager_template_module.rst:47: WARNING: undefined label: ansible_collections.oci_template_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_sch_service_connector_module.rst:49: WARNING: undefined label: ansible_collections.oci_service_connector_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_service_catalog_module.rst:47: WARNING: undefined label: ansible_collections.oci_service_catalog_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_service_catalog_private_application_module.rst:47: WARNING: undefined label: ansible_collections.oci_private_application_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_streaming_connect_harness_module.rst:47: WARNING: undefined label: ansible_collections.oci_connect_harness_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_streaming_stream_module.rst:47: WARNING: undefined label: ansible_collections.oci_stream_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_streaming_stream_pool_module.rst:47: WARNING: undefined label: ansible_collections.oci_stream_pool_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_vault_secret_module.rst:48: WARNING: undefined label: ansible_collections.oci_secret_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_vulnerability_scanning_container_scan_recipe_module.rst:47: WARNING: undefined label: ansible_collections.oci_container_scan_recipe_actions_module
+writing output... [ 92%] collections/oracle/oci/oci_vulnerability_scanning_container_scan_target_module .. collections/ovirt/ovirt/ovirt_vm_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_vulnerability_scanning_container_scan_target_module.rst:47: WARNING: undefined label: ansible_collections.oci_container_scan_target_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_vulnerability_scanning_host_scan_target_module.rst:47: WARNING: undefined label: ansible_collections.oci_host_scan_target_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_waas_address_list_module.rst:47: WARNING: undefined label: ansible_collections.oci_address_list_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_waas_certificate_module.rst:48: WARNING: undefined label: ansible_collections.oci_waas_certificate_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_waas_custom_protection_rule_module.rst:48: WARNING: undefined label: ansible_collections.oci_custom_protection_rule_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_waas_http_redirect_module.rst:47: WARNING: undefined label: ansible_collections.oci_http_redirect_actions_module
+/home/samccann/ansible/docs/docsite/rst/collections/oracle/oci/oci_waas_policy_module.rst:53: WARNING: undefined label: ansible_collections.oci_waas_policy_actions_module
+writing output... [ 93%] collections/ovirt/ovirt/ovirt_vm_module .. collections/purestorage/flashblade/purefb_eula_module
+writing output... [ 94%] collections/purestorage/flashblade/purefb_fs_module .. collections/steampunk/aws/ec2_volume_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_instance_info_module.rst:293: WARNING: undefined label: ansible_collections.ec2_instance_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_instance_module.rst:481: WARNING: undefined label: ansible_collections.ec2_instance_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_instance_module.rst:483: WARNING: undefined label: ansible_collections.ec2_network_interface_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_internet_gateway_info_module.rst:245: WARNING: undefined label: ansible_collections.ec2_internet_gateway_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_internet_gateway_module.rst:296: WARNING: undefined label: ansible_collections.ec2_internet_gateway_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_key_pair_info_module.rst:200: WARNING: undefined label: ansible_collections.ec2_key_pair_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_key_pair_module.rst:275: WARNING: undefined label: ansible_collections.ec2_key_pair_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_network_interface_info_module.rst:246: WARNING: undefined label: ansible_collections.ec2_network_interface_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_network_interface_module.rst:473: WARNING: undefined label: ansible_collections.ec2_network_interface_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_security_group_info_module.rst:248: WARNING: undefined label: ansible_collections.ec2_security_group_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_security_group_module.rst:883: WARNING: undefined label: ansible_collections.ec2_security_group_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_subnet_info_module.rst:246: WARNING: undefined label: ansible_collections.ec2_subnet_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_subnet_module.rst:342: WARNING: undefined label: ansible_collections.ec2_subnet_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_volume_info_module.rst:261: WARNING: undefined label: ansible_collections.ec2_volume_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_volume_module.rst:404: WARNING: undefined label: ansible_collections.ec2_volume_info_module
+writing output... [ 96%] collections/steampunk/aws/ec2_vpc_address_info_module .. collections/theforeman/foreman/host_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_vpc_address_info_module.rst:199: WARNING: undefined label: ansible_collections.ec2_vpc_address_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_vpc_address_module.rst:298: WARNING: undefined label: ansible_collections.ec2_vpc_address_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_vpc_info_module.rst:230: WARNING: undefined label: ansible_collections.ec2_vpc_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/ec2_vpc_module.rst:311: WARNING: undefined label: ansible_collections.ec2_vpc_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/steampunk/aws/s3_bucket_info_module.rst:199: WARNING: undefined label: ansible_collections.s3_bucket_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_architecture_module.rst:21: WARNING: undefined label: ansible_collections.architecture_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_auth_source_ldap_module.rst:21: WARNING: undefined label: ansible_collections.auth_source_ldap_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_bookmark_module.rst:21: WARNING: undefined label: ansible_collections.bookmark_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_compute_attribute_module.rst:21: WARNING: undefined label: ansible_collections.compute_attribute_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_compute_profile_module.rst:21: WARNING: undefined label: ansible_collections.compute_profile_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_compute_resource_module.rst:21: WARNING: undefined label: ansible_collections.compute_resource_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_config_group_module.rst:21: WARNING: undefined label: ansible_collections.config_group_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_domain_module.rst:21: WARNING: undefined label: ansible_collections.domain_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_environment_module.rst:21: WARNING: undefined label: ansible_collections.puppet_environment_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_external_usergroup_module.rst:21: WARNING: undefined label: ansible_collections.external_usergroup_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_global_parameter_module.rst:21: WARNING: undefined label: ansible_collections.global_parameter_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_host_module.rst:21: WARNING: undefined label: ansible_collections.host_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_host_power_module.rst:21: WARNING: undefined label: ansible_collections.host_power_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_hostgroup_module.rst:21: WARNING: undefined label: ansible_collections.hostgroup_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_image_module.rst:21: WARNING: undefined label: ansible_collections.image_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_installation_medium_module.rst:21: WARNING: undefined label: ansible_collections.installation_medium_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_job_template_module.rst:21: WARNING: undefined label: ansible_collections.job_template_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_location_module.rst:21: WARNING: undefined label: ansible_collections.location_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_model_module.rst:21: WARNING: undefined label: ansible_collections.hardware_model_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_operatingsystem_module.rst:21: WARNING: undefined label: ansible_collections.operatingsystem_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_organization_module.rst:21: WARNING: undefined label: ansible_collections.organization_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_os_default_template_module.rst:21: WARNING: undefined label: ansible_collections.os_default_template_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_provisioning_template_module.rst:21: WARNING: undefined label: ansible_collections.provisioning_template_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_ptable_module.rst:21: WARNING: undefined label: ansible_collections.partition_table_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_realm_module.rst:21: WARNING: undefined label: ansible_collections.realm_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_role_module.rst:21: WARNING: undefined label: ansible_collections.role_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_scap_content_module.rst:21: WARNING: undefined label: ansible_collections.scap_content_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_scap_tailoring_file_module.rst:21: WARNING: undefined label: ansible_collections.scap_tailoring_file_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_scc_account_module.rst:21: WARNING: undefined label: ansible_collections.scc_account_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_scc_product_module.rst:21: WARNING: undefined label: ansible_collections.scc_product_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_search_facts_module.rst:21: WARNING: undefined label: ansible_collections.resource_info_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_setting_module.rst:21: WARNING: undefined label: ansible_collections.setting_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_smart_class_parameter_module.rst:21: WARNING: undefined label: ansible_collections.smart_class_parameter_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_snapshot_module.rst:21: WARNING: undefined label: ansible_collections.snapshot_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_subnet_module.rst:21: WARNING: undefined label: ansible_collections.subnet_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_templates_import_module.rst:21: WARNING: undefined label: ansible_collections.templates_import_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_user_module.rst:21: WARNING: undefined label: ansible_collections.user_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/foreman_usergroup_module.rst:21: WARNING: undefined label: ansible_collections.usergroup_module
+writing output... [ 97%] collections/theforeman/foreman/host_power_module .. collections/vmware/vmware_rest/appliance_shutdown_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_activation_key_module.rst:21: WARNING: undefined label: ansible_collections.activation_key_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_content_credential_module.rst:21: WARNING: undefined label: ansible_collections.content_credential_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_content_view_filter_module.rst:21: WARNING: undefined label: ansible_collections.content_view_filter_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_content_view_module.rst:21: WARNING: undefined label: ansible_collections.content_view_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_content_view_version_module.rst:21: WARNING: undefined label: ansible_collections.content_view_version_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_host_collection_module.rst:21: WARNING: undefined label: ansible_collections.host_collection_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_lifecycle_environment_module.rst:21: WARNING: undefined label: ansible_collections.lifecycle_environment_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_manifest_module.rst:21: WARNING: undefined label: ansible_collections.subscription_manifest_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_product_module.rst:21: WARNING: undefined label: ansible_collections.product_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_repository_module.rst:21: WARNING: undefined label: ansible_collections.repository_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_repository_set_module.rst:21: WARNING: undefined label: ansible_collections.repository_set_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_sync_module.rst:21: WARNING: undefined label: ansible_collections.repository_sync_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_sync_plan_module.rst:21: WARNING: undefined label: ansible_collections.sync_plan_module
+/home/samccann/ansible/docs/docsite/rst/collections/theforeman/foreman/katello_upload_module.rst:21: WARNING: undefined label: ansible_collections.content_upload_module
+writing output... [ 98%] collections/vmware/vmware_rest/appliance_system_globalfips_info_module .. collections/vyos/vyos/logging_module
+writing output... [100%] collections/vyos/vyos/ospf_interfaces_module .. user_guide/command_line_tools
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:47: WARNING: undefined label: ansible_collections.net_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:48: WARNING: undefined label: ansible_collections.win_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:49: WARNING: undefined label: ansible_collections.ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:309: WARNING: undefined label: ansible_collections.net_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:310: WARNING: undefined label: ansible_collections.win_ping_module
+/home/samccann/ansible/docs/docsite/rst/collections/vyos/vyos/vyos_ping_module.rst:311: WARNING: undefined label: ansible_collections.ping_module
+
+waiting for workers...
+/home/samccann/ansible/docs/docsite/rst/collections/vmware/vmware_rest/vcenter_vm_storage_policy_module.rst:244: WARNING: Could not lex literal_block as "yaml+jinja". Highlighting skipped.
+/home/samccann/ansible/docs/docsite/rst/collections/community/aws/ec2_placement_group_info_module.rst:288: WARNING: Could not lex literal_block as "yaml+jinja". Highlighting skipped.
+generating indices... genindex py-modindex done
+writing additional pages... search done
+copying downloadable files... [ 50%] network/getting_started/sample_files/first_playbook.yml
+copying downloadable files... [100%] network/getting_started/sample_files/first_playbook_ext.yml
+
+copying static files... done
+copying extra files... done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 497 warnings.
+
+The HTML pages are in _build/html.
+make[2]: Leaving directory '/home/samccann/ansible/docs/docsite'
+make[1]: Leaving directory '/home/samccann/ansible/docs/docsite'
