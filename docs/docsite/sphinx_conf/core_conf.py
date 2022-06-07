@@ -186,7 +186,6 @@ html_theme_options = {
     'hubspot_id': '330046',
     'satellite_tracking': True,
     'show_extranav': True,
-    'swift_id': 'yABGvz2N8PwcwBxyfzUc',
     'tag_manager_id': 'GTM-PSB293',
     'vcs_pageview_mode': 'edit'
 }
@@ -268,7 +267,7 @@ html_copy_source = False
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
-html_use_opensearch = 'https://docs.ansible.com/ansible/devel'
+html_use_opensearch = "https://docs.ansible.com/ansible-core/devel"
 
 # If nonempty, this is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = ''
