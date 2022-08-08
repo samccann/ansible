@@ -97,7 +97,6 @@ ansible_structure: generate_rst
 core_structure: core_generate_rst
 	@echo "Creating symlinks in core_generate_rst"
 	-ln -sf ../rst/core_index.rst rst/index.rst
-	-ln -sf ../dev_guide/core_index.rst rst/dev_guide/index.rst
 # set up the correct core conf.py to use for English vs a translated language
 ifdef LANGOPTS
 	-ln -sf ../sphinx_conf/core_lang_conf.py rst/conf.py
