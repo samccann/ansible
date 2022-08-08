@@ -202,7 +202,7 @@ html_context = {
     'github_root_dir': 'devel/lib/ansible',
     'github_cli_version': 'devel/lib/ansible/cli/',
     'current_version': version,
-    'latest_version': '2.13',
+    'latest_version': '2.12',
     # list specifically out of order to make latest work
     'available_versions': ('2.13_ja', '2.12_ja', '2.11_ja',),
 }
