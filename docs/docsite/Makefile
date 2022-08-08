@@ -97,14 +97,11 @@ ansible_structure:
 core_structure:
 	@echo "Creating symlinks in core_structure"
 	-ln -sf ../rst/core_index.rst rst/index.rst
-<<<<<<< HEAD
-=======
 	-ln -sf ../dev_guide/core_index.rst rst/dev_guide/index.rst
 # set up the correct core conf.py to use for English vs a translated language
 ifdef LANGOPTS
 	-ln -sf ../sphinx_conf/core_lang_conf.py rst/conf.py
 else
->>>>>>> 5419a6f67f (try fixing Japanese version switcher)
 	-ln -sf ../sphinx_conf/core_conf.py rst/conf.py
 endif
 
